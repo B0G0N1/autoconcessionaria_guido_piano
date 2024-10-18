@@ -1,0 +1,23 @@
+#home {
+    #jumbo {
+        background-image: url('../images/image-1.png');
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #jumbo-b {
+        background-image: url('../images/image-2.png');
+        height: 600px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #jumbo-c {
+        background-image: url('../images/jumbo.png');
+        height: 400px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}

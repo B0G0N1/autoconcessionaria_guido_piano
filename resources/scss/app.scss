@@ -1,3 +1,29 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.css";
 
-@import '@fortawesome/fontawesome-free/css/all.css';
+@import "home";
+@import "header";
+@import "footer";
+@import "show";
+@import "index";
+@import "edit";
+@import "create";
+
+main {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.carousel.slide {
+    width: 800px;
+    height: 500px;
+
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.538);
+    }
+
+    .carousel-item img {
+        width: 800px;
+        height: 500px;
+    }
+}

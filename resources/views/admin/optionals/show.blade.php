@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="show">
-        <div class="container">
+    <div id="admin-show">
+        <div class="container-fluid">
+
+            @if (session('success_update'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success_update') }}
+                </div>
+            @endif
+
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="m-2 display-4 text-primary">{{ $optional->name }}</h1>
                 <div class="form-actions mt-4 text-right pr-3 pl-3">
                     <a href="{{ route('admin.optionals.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Torna alla lista
                     </a>
-                    <a href="{{ route('admin.optionals.edit', $optional->id) }}" class="btn btn-warning text-dark">
+                    <a href="{{ route('admin.optionals.edit', $optional->slug) }}" class="btn btn-warning text-dark">
                         <i class="fas fa-edit"></i> Modifica Optional
                     </a>
                 </div>

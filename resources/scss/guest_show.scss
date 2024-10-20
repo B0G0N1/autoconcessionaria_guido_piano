@@ -1,0 +1,78 @@
+#guest-show {
+    .brand-header, .optional-header, .car-header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #000;
+        color: #FFC107;
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .btn-warning {
+            background-color: #FFC107;
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            border: none;
+
+            &:hover {
+                background-color: darken(#FFC107, 10%);
+                color: #fff;
+            }
+        }
+    }
+
+    .brand-details, .optional-details, .car-details {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
+        h3 {
+            color: #000;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+
+            li {
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+
+                i {
+                    margin-right: 10px;
+                    font-size: 1.5rem;
+                    color: #FFC107;
+                }
+
+                strong {
+                    color: #000;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .container {
+        padding: 2rem;
+    }
+
+    .row {
+        margin-top: 1.5rem;
+    }
+}

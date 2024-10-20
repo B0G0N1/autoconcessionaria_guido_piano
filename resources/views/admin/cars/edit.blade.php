@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="edit" class="edit-container">
+    <div id="admin-edit" class="edit-container">
         <div class="edit-header mb-4">
             <h1 class="text-uppercase">Modifica Auto: {{ $car->brand->name }} {{ $car->model }}</h1>
         </div>
         <div class="edit-body">
-            <form action="{{ route('admin.cars.update', $car->id) }}" method="POST">
+            <form action="{{ route('admin.cars.update', $car->slug) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -48,10 +48,28 @@
                         @enderror
                     </div>
 
+                    {{-- Seleziona Colore (dropdown) --}}
                     <div class="form-group col-md-6">
                         <label for="color">Colore:</label>
-                        <input type="text" id="color" name="color" value="{{ old('color', $car->color) }}"
-                            class="form-control @error('color') is-invalid @enderror" required>
+                        <select id="color" name="color" class="form-control @error('color') is-invalid @enderror"
+                            required>
+                            <option value="">Seleziona un colore</option>
+                            <option value="Bianco" {{ old('color', $car->color) == 'Bianco' ? 'selected' : '' }}>Bianco
+                            </option>
+                            <option value="Nero" {{ old('color', $car->color) == 'Nero' ? 'selected' : '' }}>Nero
+                            </option>
+                            <option value="Grigio" {{ old('color', $car->color) == 'Grigio' ? 'selected' : '' }}>Grigio
+                            </option>
+                            <option value="Blu" {{ old('color', $car->color) == 'Blu' ? 'selected' : '' }}>Blu</option>
+                            <option value="Rosso" {{ old('color', $car->color) == 'Rosso' ? 'selected' : '' }}>Rosso
+                            </option>
+                            <option value="Argento" {{ old('color', $car->color) == 'Argento' ? 'selected' : '' }}>Argento
+                            </option>
+                            <option value="Verde" {{ old('color', $car->color) == 'Verde' ? 'selected' : '' }}>Verde
+                            </option>
+                            <option value="Giallo" {{ old('color', $car->color) == 'Giallo' ? 'selected' : '' }}>Giallo
+                            </option>
+                        </select>
                         @error('color')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -149,7 +167,7 @@
 
                 <div class="form-actions mt-4 text-right">
                     <button type="submit" class="btn btn-warning text-dark">Aggiorna Auto</button>
-                    <a href="{{ route('admin.cars.show', ['car' => $car->id]) }}" class="btn btn-secondary">Annulla</a>
+                    <a href="{{ route('admin.cars.show', ['car' => $car->slug]) }}" class="btn btn-secondary">Annulla</a>
                 </div>
             </form>
         </div>

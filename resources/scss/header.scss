@@ -1,4 +1,4 @@
-header {
+#header {
     background-color: #333;
     height: 60px;
     line-height: 60px;
@@ -54,6 +54,21 @@ header {
 
     .navbar-collapse {
         justify-content: space-between;
+    }
+
+    .dropdown-menu {
+        background-color: #333;
+        border: none;
+    }
+
+    .dropdown-item {
+        color: #fff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #000;
+        color: #fff;
     }
 
     @media (max-width: 768px) {

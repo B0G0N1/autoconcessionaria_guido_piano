@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\OptionalController;
 
+use App\Http\Controllers\Guest\GuestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,10 +29,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function() {
-    // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/cars', CarController::class);
-    Route::resource('/brands', BrandController::class);
-    Route::resource('/optionals', OptionalController::class);
+    Route::resource('/cars', CarController::class)->parameters([
+        'cars' => 'car:slug'
+    ]);
+    Route::resource('/brands', BrandController::class)->parameters([
+        'brands' => 'brand:slug'
+    ]);
+    Route::resource('/optionals', OptionalController::class)->parameters([
+        'optionals' => 'optional:slug'
+    ]);
 });
 
 Route::middleware('auth')->group(function () {
@@ -38,5 +45,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/cars', [GuestController::class, 'cars'])->name('guest.cars.index');
+Route::get('/cars/{slug}', [GuestController::class, 'showCar'])->name('guest.cars.show');
+
+Route::get('/brands', [GuestController::class, 'brands'])->name('guest.brands.index');
+Route::get('/brands/{slug}', [GuestController::class, 'showBrand'])->name('guest.brands.show');
+
+Route::get('/optionals', [GuestController::class, 'optionals'])->name('guest.optionals.index');
+Route::get('/optionals/{slug}', [GuestController::class, 'showOptional'])->name('guest.optionals.show');
 
 require __DIR__.'/auth.php';

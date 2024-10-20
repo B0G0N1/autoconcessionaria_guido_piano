@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use Illuminate\Support\Str;
 
 class CarController extends Controller
 {
@@ -43,13 +44,18 @@ class CarController extends Controller
      */
     public function store(StoreCarRequest $request)
     {
-        $car = Car::create($request->validated());
+        $data = $request->validated();
+        
+        $brand = Brand::find($request->brand_id);
+        $data['slug'] = Str::slug($brand->name . '-' . $request->model);
+
+        $car = Car::create($data);
 
         if ($request->has('optionals')) {
             $car->optionals()->sync($request->optionals);
         }
 
-        return redirect()->route('admin.cars.index')->with('success', 'Car created successfully.');
+        return redirect()->route('admin.cars.index')->with('success_create', 'Macchina creata con successo.');
     }
 
     /**
@@ -87,7 +93,14 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        $car->update($request->validated());
+        $data = $request->validated();
+
+        if ($car->model !== $request->model) {
+            $brand = Brand::find($request->brand_id);
+            $data['slug'] = Str::slug($brand->name . '-' . $request->model);
+        }
+
+        $car->update($data);
 
         if ($request->has('optionals')) {
             $car->optionals()->sync($request->optionals);
@@ -95,7 +108,7 @@ class CarController extends Controller
             $car->optionals()->detach();
         }
 
-        return redirect()->route('admin.cars.show', ['car' => $car->id])->with('success', 'Car updated successfully.');
+        return redirect()->route('admin.cars.show', ['car' => $car->slug])->with('success_update', 'Macchina aggiornata con successo.');
     }
 
     /**
@@ -109,6 +122,6 @@ class CarController extends Controller
         $car->optionals()->detach();
         $car->delete();
 
-        return redirect()->route('cars.index')->with('success', 'Car deleted successfully.');
+        return redirect()->route('admin.cars.index')->with('success_delete', 'Macchina eliminata con successo.');
     }
 }

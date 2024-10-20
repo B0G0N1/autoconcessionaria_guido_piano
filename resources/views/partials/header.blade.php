@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg navbar-dark">
+<header id="header" class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('dashboard') }}">
             <span class="logo-text"><span class="logo-highlight">Guido</span>Piano</span>
@@ -13,32 +13,18 @@
                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.cars.index') }}">Auto</a>
+                    <a class="nav-link" href="{{ route('guest.cars.index') }}">Auto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.brands.index') }}">Concessionarie</a>
+                    <a class="nav-link" href="{{ route('guest.brands.index') }}">Concessionarie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.optionals.index') }}">Optional</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        About Us
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Azione</a></li>
-                        <li><a class="dropdown-item" href="#">Un'altra azione</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Qualcos'altro qui</a></li>
-                    </ul>
+                    <a class="nav-link" href="{{ route('guest.optionals.index') }}">Optional</a>
                 </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca">
-                <button class="btn btn-outline-light" type="submit">Cerca</button>
+                <button class="btn btn-outline-light me-3" type="submit">Cerca</button>
             </form>
             <div class="d-flex align-items-center ms-2">
                 <ul class="navbar-nav ml-auto">
@@ -57,12 +43,13 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
-                                <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                            <div class="dropdown-menu dropdown-menu-right bg-dark text-light"
+                                aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-light"
+                                    href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                                <a class="dropdown-item text-light" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                <a class="dropdown-item text-light" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -72,7 +59,7 @@
                         </li>
                     @endguest
                 </ul>
-                <img src="https://flagcdn.com/16x12/it.png" alt="Bandiera Italiana" class="ms-3">
+                <img src="https://flagcdn.com/16x12/it.png" alt="Bandiera Italiana" class="me-2">
             </div>
         </div>
     </div>

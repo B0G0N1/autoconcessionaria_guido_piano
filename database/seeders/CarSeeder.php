@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Car;
 use App\Models\Brand;
 use App\Models\Optional;
+use Illuminate\Support\Str;
 
 class CarSeeder extends Seeder
 {
@@ -24,6 +25,8 @@ class CarSeeder extends Seeder
             $brand = Brand::where('name', $car['brand'])->first();
             if ($brand) {
                 $new_car->brand_id = $brand->id;
+
+                $new_car->slug = Str::slug($brand->name . '-' . $car['model'] . '-' . $car['year']);
             }
 
             $new_car->model = $car['model'];
@@ -36,7 +39,7 @@ class CarSeeder extends Seeder
             $new_car->km = $car['km'];
             $new_car->used = $car['used'];
             $new_car->thumb = $car['thumb'] ?? null;
-            
+
             $new_car->save();
 
             if (isset($car['optionals'])) {

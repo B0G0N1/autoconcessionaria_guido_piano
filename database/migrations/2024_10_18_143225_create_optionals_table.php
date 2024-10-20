@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('optionals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
             $table->string('thumb')->nullable();

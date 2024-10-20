@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Brand;
+use Illuminate\Support\Str;
 
 class BrandSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class BrandSeeder extends Seeder
             $new_brand = new Brand();
             
             $new_brand->name = $brand['name'];
+            $new_brand->slug = Str::slug($brand['name']);
             $new_brand->phone = $brand['phone'];
             $new_brand->address = $brand['address'];
             $new_brand->thumb = $brand['thumb'] ?? null;

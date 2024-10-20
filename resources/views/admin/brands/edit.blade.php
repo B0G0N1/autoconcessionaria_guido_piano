@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="edit" class="edit-container">
+    <div id="admin-edit" class="edit-container">
         <div class="edit-header">
             <h1 class="text-uppercase">Modifica Brand: {{ $brand->name }}</h1>
         </div>
         <div class="edit-body">
-            <form action="{{ route('admin.brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.brands.update', $brand->slug) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -43,9 +43,9 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="thumb">Logo Azienda (Opzionale):</label>
-                        <input type="file" id="thumb" name="thumb"
-                            class="form-control @error('thumb') is-invalid @enderror">
+                        <label for="thumb">Logo Azienda (URL Opzionale):</label>
+                        <input type="text" id="thumb" name="thumb" value="{{ old('thumb', $brand->thumb) }}"
+                            class="form-control @error('thumb') is-invalid @enderror" placeholder="Inserisci URL del logo">
                         @error('thumb')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
@@ -54,7 +54,7 @@
 
                 <div class="form-actions mt-4 text-right">
                     <button type="submit" class="btn btn-warning text-dark">Aggiorna Brand</button>
-                    <a href="{{ route('admin.brands.show', ['brand' => $brand->id]) }}"
+                    <a href="{{ route('admin.brands.show', ['brand' => $brand->slug]) }}"
                         class="btn btn-secondary">Annulla</a>
                 </div>
             </form>

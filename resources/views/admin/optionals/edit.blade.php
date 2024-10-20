@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="edit" class="edit-container">
+    <div id="admin-edit" class="edit-container">
         <div class="edit-header">
             <h1 class="text-uppercase">Modifica Optional: {{ $optional->name }}</h1>
         </div>
         <div class="edit-body">
-            <form action="{{ route('admin.optionals.update', $optional->id) }}" method="POST">
+            <form action="{{ route('admin.optionals.update', $optional->slug) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -43,7 +43,7 @@
 
                 <div class="form-actions mt-4 text-right">
                     <button type="submit" class="btn btn-warning text-dark">Aggiorna Optional</button>
-                    <a href="{{ route('admin.optionals.show', ['optional' => $optional->id]) }}"
+                    <a href="{{ route('admin.optionals.show', ['optional' => $optional->slug]) }}"
                         class="btn btn-secondary">Annulla</a>
                 </div>
             </form>

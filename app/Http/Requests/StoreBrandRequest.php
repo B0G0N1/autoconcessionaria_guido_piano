@@ -27,7 +27,7 @@ class StoreBrandRequest extends FormRequest
             'name' => 'required|string|max:100|unique:brands,name',
             'phone' => 'required|string|max:15|regex:/^[0-9\-\(\)\/\+\s]*$/',
             'address' => 'required|string|max:100',
-            'thumb' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumb' => 'nullable|url',
         ];
     }
 
@@ -53,9 +53,7 @@ class StoreBrandRequest extends FormRequest
             'address.string' => 'Il campo "indirizzo" deve essere una stringa.',
             'address.max' => 'Il campo "indirizzo" non può superare i 100 caratteri.',
             
-            'thumb.image' => 'Il campo "thumb" deve essere un\'immagine.',
-            'thumb.mimes' => 'Il campo "thumb" deve essere un file di tipo: jpeg, png, jpg, gif.',
-            'thumb.max' => 'Il campo "thumb" non può superare i 2048 KB.',
+            'thumb.url' => 'Il campo "thumb" deve essere un URL valido.',
         ];
     }
 }

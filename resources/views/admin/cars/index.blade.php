@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="index">
+    <div id="admin-index">
         <div class="container-fluid">
             <div class="row bg-giallo py-3 mb-3">
                 <div class="col-12 d-flex justify-content-between align-items-center">
@@ -11,6 +11,19 @@
                     </a>
                 </div>
             </div>
+
+            @if (session('success_create'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success_create') }}
+                </div>
+            @endif
+
+            @if (session('success_delete'))
+                <div class="alert alert-danger alert-dismissible fade show">
+                    {{ session('success_delete') }}
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive-custom">
@@ -45,16 +58,17 @@
                                         <td>{{ $car->used ? 'Sì' : 'No' }}</td>
                                         <td class="pe-4">
                                             <div class="d-flex gap-1 justify-content-end">
-                                                <a href="{{ route('admin.cars.show', ['car' => $car->id]) }}"
+                                                <a href="{{ route('admin.cars.show', ['car' => $car->slug]) }}"
                                                     class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('admin.cars.edit', ['car' => $car->id]) }}"
+                                                <a href="{{ route('admin.cars.edit', ['car' => $car->slug]) }}"
                                                     class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.cars.destroy', ['car' => $car->id]) }}"
-                                                    method="POST" class="mb-0">
+                                                <form action="{{ route('admin.cars.destroy', ['car' => $car->slug]) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Sei sicuro di voler eliminare questo brand?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm delete-car">

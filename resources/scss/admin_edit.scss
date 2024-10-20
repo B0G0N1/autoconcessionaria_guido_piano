@@ -1,5 +1,5 @@
-#create {
-    .create-container {
+#admin-edit {
+    .edit-container {
         max-width: 900px;
         margin: 20px auto;
         background: #ffffff;
@@ -9,15 +9,14 @@
         color: #333;
     }
 
-    .create-header {
+    .edit-header {
         background-color: #ffc107;
         padding: 15px;
         color: #000;
         text-align: center;
-        border-radius: 8px 8px 0 0;
     }
 
-    .create-body {
+    .edit-body {
         background: #ffffff;
         padding: 20px;
         border-radius: 0 0 8px 8px;
@@ -68,13 +67,13 @@
         gap: 10px;
     }
 
-    .btn-success {
+    .btn-warning {
         background-color: #ffc107;
         border-color: #ffc107;
         color: #000;
     }
 
-    .btn-success:hover {
+    .btn-warning:hover {
         background-color: #e0a800;
         border-color: #e0a800;
     }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="create" class="create-container">
+    <div id="admin-create" class="create-container">
         <div class="create-header">
             <h1 class="text-uppercase">Aggiungi un nuovo Brand</h1>
         </div>

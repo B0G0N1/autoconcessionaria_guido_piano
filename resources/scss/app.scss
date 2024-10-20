@@ -1,13 +1,23 @@
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-@import "home";
+@import "welcome";
+@import "dashboard";
+
 @import "header";
 @import "footer";
-@import "show";
-@import "index";
-@import "edit";
-@import "create";
+
+@import "admin_index";
+@import "admin_show";
+@import "admin_edit";
+@import "admin_create";
+
+@import "guest_index";
+@import "guest_show";
+
+body {
+    font-size: 16px;
+}
 
 main {
     height: calc(100vh - 100px);

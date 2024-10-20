@@ -26,8 +26,8 @@ class StoreCarRequest extends FormRequest
         return [
             'brand_id' => 'required|exists:brands,id',
             'model' => 'required|string|max:30',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'color' => 'required|string|max:15',
+            'year' => 'required|integer|min:1901|max:' . date('Y'),
+            'color' => 'required|string|in:Bianco,Nero,Grigio,Blu,Rosso,Argento,Verde,Giallo',
             'price' => 'required|numeric|min:0',
             'engine' => 'required|string|max:30',
             'horsepower' => 'required|integer|min:0|max:9999',
@@ -60,7 +60,7 @@ class StoreCarRequest extends FormRequest
 
             'color.required' => 'Il campo "Colore" è obbligatorio.',
             'color.string' => 'Il campo "Colore" deve essere una stringa.',
-            'color.max' => 'Il campo "Colore" non può superare i 15 caratteri.',
+            'color.in' => 'Il campo "Colore" deve essere uno tra: Bianco, Nero, Grigio, Blu, Rosso, Argento, Verde, Giallo.',
 
             'price.required' => 'Il campo "Prezzo" è obbligatorio.',
             'price.numeric' => 'Il campo "Prezzo" deve essere un numero.',

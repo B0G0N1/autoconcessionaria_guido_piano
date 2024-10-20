@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('brand_id');
-            $table->string('model', 30);
+            $table->string('model', 30)->unique();
+            $table->string('slug');
             $table->year('year');
             $table->string('color', 15);
             $table->decimal('price', 10, 2);

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Optional;
+use Illuminate\Support\Str;
 
 class OptionalSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class OptionalSeeder extends Seeder
         foreach ($optionals as $optional) {
             Optional::create([
                 'name' => $optional['name'],
+                'slug' => Str::slug($optional['name']),
                 'description' => $optional['description'],
                 'price' => $optional['price'],
                 'thumb' => $optional['thumb'] ?? null,

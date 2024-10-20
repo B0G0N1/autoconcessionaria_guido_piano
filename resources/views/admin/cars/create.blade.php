@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="create" class="create-container">
+    <div id="admin-create" class="create-container">
         <div class="create-header">
             <h1 class="text-uppercase">Aggiungi una nuova auto</h1>
         </div>
@@ -10,15 +10,24 @@
                 @csrf
 
                 <div class="form-row">
+                    {{-- Seleziona Marca (dropdown) --}}
                     <div class="form-group col-md-6">
-                        <label for="brand">Marca:</label>
-                        <input type="text" id="brand" name="brand" value="{{ old('brand') }}"
-                            class="form-control @error('brand') is-invalid @enderror" required>
-                        @error('brand')
+                        <label for="brand_id">Marca:</label>
+                        <select id="brand_id" name="brand_id" class="form-control @error('brand_id') is-invalid @enderror"
+                            required>
+                            <option value="">Seleziona una marca</option>
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                    {{ $brand->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('brand_id')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
 
+                    {{-- Campo per il modello --}}
                     <div class="form-group col-md-6">
                         <label for="model">Modello:</label>
                         <input type="text" id="model" name="model" value="{{ old('model') }}"
@@ -39,10 +48,21 @@
                         @enderror
                     </div>
 
+                    {{-- Seleziona Colore (dropdown) --}}
                     <div class="form-group col-md-6">
                         <label for="color">Colore:</label>
-                        <input type="text" id="color" name="color" value="{{ old('color') }}"
-                            class="form-control @error('color') is-invalid @enderror" required>
+                        <select id="color" name="color" class="form-control @error('color') is-invalid @enderror"
+                            required>
+                            <option value="">Seleziona un colore</option>
+                            <option value="Bianco" {{ old('color') == 'Bianco' ? 'selected' : '' }}>Bianco</option>
+                            <option value="Nero" {{ old('color') == 'Nero' ? 'selected' : '' }}>Nero</option>
+                            <option value="Grigio" {{ old('color') == 'Grigio' ? 'selected' : '' }}>Grigio</option>
+                            <option value="Blu" {{ old('color') == 'Blu' ? 'selected' : '' }}>Blu</option>
+                            <option value="Rosso" {{ old('color') == 'Rosso' ? 'selected' : '' }}>Rosso</option>
+                            <option value="Argento" {{ old('color') == 'Argento' ? 'selected' : '' }}>Argento</option>
+                            <option value="Verde" {{ old('color') == 'Verde' ? 'selected' : '' }}>Verde</option>
+                            <option value="Giallo" {{ old('color') == 'Giallo' ? 'selected' : '' }}>Giallo</option>
+                        </select>
                         @error('color')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror

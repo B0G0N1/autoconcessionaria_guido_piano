@@ -11,9 +11,10 @@ class Brand extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'phone',
         'address',
-        'thumb'
+        'thumb',
     ];
     
     public function cars()

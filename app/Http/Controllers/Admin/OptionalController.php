@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOptionalRequest;
 use App\Http\Requests\UpdateOptionalRequest;
+use Illuminate\Support\Str;
 
 class OptionalController extends Controller
 {
@@ -39,8 +40,11 @@ class OptionalController extends Controller
      */
     public function store(StoreOptionalRequest $request)
     {
-        Optional::create($request->validated());
-        return redirect()->route('admin.optionals.index')->with('success', 'Optional created successfully.');
+        $data = $request->validated();
+        $data['slug'] = Str::slug($request->name);
+        Optional::create($data);
+
+        return redirect()->route('admin.optionals.index')->with('success_create', 'Optional creato con successo.');
     }
 
     /**
@@ -75,8 +79,13 @@ class OptionalController extends Controller
      */
     public function update(UpdateOptionalRequest $request, Optional $optional)
     {
-        $optional->update($request->validated());
-        return redirect()->route('admin.optionals.show', ['optional' => $optional->id])->with('success', 'Optional updated successfully.');
+        $data = $request->validated();
+        if ($optional->name !== $request->name) {
+            $data['slug'] = Str::slug($request->name);
+        }
+        $optional->update($data);
+
+        return redirect()->route('admin.optionals.show', ['optional' => $optional->slug])->with('success_update', 'Optional aggiornato con successo.');
     }
 
     /**
@@ -90,6 +99,6 @@ class OptionalController extends Controller
         $optional->cars()->detach();
         $optional->delete();
         
-        return redirect()->route('admin.optionals.index')->with('success', 'Optional deleted successfully.');
+        return redirect()->route('admin.optionals.index')->with('success_delete', 'Optional eliminato con successo.');
     }
 }

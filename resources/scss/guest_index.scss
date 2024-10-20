@@ -1,0 +1,126 @@
+#guest-index {
+    .search-bar {
+        background-color: transparent;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px;
+        border-radius: 0;
+
+        .form-group {
+            label {
+                color: #333;
+                font-weight: bold;
+            }
+
+            select {
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ffc107;
+                background-color: #333;
+                color: #fff;
+                min-width: 150px;
+
+                &:focus {
+                    border-color: #ffc107;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #e0a800;
+            }
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        height: 100%;
+        margin: 0 10px;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+
+            .card-title {
+                font-size: 1.25rem;
+                color: #000;
+                font-weight: bold;
+            }
+
+            .card-text {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                color: #333;
+                margin-bottom: 0;
+                flex-grow: 1;
+
+                strong {
+                    font-weight: bold;
+                    color: #000;
+                }
+            }
+        }
+
+        .card-footer {
+            background-color: #333333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .text-warning {
+                font-size: 1.25rem;
+                font-weight: bold;
+            }
+
+            .btn {
+                background-color: #ffc107;
+                color: #000;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: #e0a800;
+                }
+            }
+        }
+    }
+}

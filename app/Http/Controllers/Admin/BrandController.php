@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -39,8 +40,10 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        Brand::create($request->validated());
-        return redirect()->route('admin.brands.index')->with('success', 'Brand created successfully.');
+        $data = $request->validated();
+        $data['slug'] = Str::slug($request->name);
+        Brand::create($data);
+        return redirect()->route('admin.brands.index')->with('success_create', 'Brand creato con successo.');
     }
 
     /**
@@ -74,8 +77,12 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $brand->update($request->validated());
-        return redirect()->route('admin.brands.show', ['brand' => $brand->id])->with('success', 'Brand updated successfully.');
+        $data = $request->validated();
+        if ($brand->name !== $request->name) {
+            $data['slug'] = Str::slug($request->name);
+        }
+        $brand->update($data);
+        return redirect()->route('admin.brands.show', ['brand' => $brand->slug])->with('success_update', 'Brand aggiornato con successo.');
     }
 
     /**
@@ -87,6 +94,6 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         $brand->delete();
-        return redirect()->route('admin.brands.index')->with('success', 'Brand deleted successfully.');
+        return redirect()->route('admin.brands.index')->with('success_delete', 'Brand cancellato con successo.');
     }
 }

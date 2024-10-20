@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="index">
+    <div id="admin-index">
         <div class="container-fluid">
             <div class="row bg-giallo py-3 mb-3">
                 <div class="col-12 d-flex justify-content-between align-items-center">
@@ -11,6 +11,19 @@
                     </a>
                 </div>
             </div>
+
+            @if (session('success_create'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success_create') }}
+                </div>
+            @endif
+
+            @if (session('success_delete'))
+                <div class="alert alert-danger alert-dismissible fade show">
+                    {{ session('success_delete') }}
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive-custom">
@@ -33,16 +46,16 @@
                                         <td>{{ number_format($optional->price, 2, ',', '.') }}</td>
                                         <td>
                                             <div class="d-flex gap-1 justify-content-end">
-                                                <a href="{{ route('admin.optionals.show', ['optional' => $optional->id]) }}"
+                                                <a href="{{ route('admin.optionals.show', ['optional' => $optional->slug]) }}"
                                                     class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('admin.optionals.edit', ['optional' => $optional->id]) }}"
+                                                <a href="{{ route('admin.optionals.edit', ['optional' => $optional->slug]) }}"
                                                     class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form
-                                                    action="{{ route('admin.optionals.destroy', ['optional' => $optional->id]) }}"
+                                                    action="{{ route('admin.optionals.destroy', ['optional' => $optional->slug]) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Sei sicuro di voler eliminare questo optional?');">
                                                     @csrf

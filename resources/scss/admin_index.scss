@@ -46,9 +46,23 @@
         }
     }
 
+    .btn-giallo {
+        background-color: #FFD700;
+        color: #212529;
+        border: none;
+        padding: 10px 12px;
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: #e6be00;
+            color: #212529;
+        }
+    }
+
     .table-responsive-custom {
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
+        overflow-x: auto;
     }
 
     .table {
@@ -82,10 +96,93 @@
     .form-control {
         border: 1px solid #ddd;
         border-radius: 5px;
+        padding: 8px;
 
         &:focus {
             border-color: #FFD700;
             box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        }
+    }
+
+    // Stili per il form di ricerca
+    .search-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 15px;
+        align-items: flex-start;
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+
+            label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            input,
+            select {
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                transition: border-color 0.2s ease-in-out;
+
+                &:focus {
+                    border-color: #FFD700;
+                    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+                }
+            }
+        }
+
+        .btn-giallo,
+        .btn-dark {
+            padding: 10px 15px;
+            margin-top: auto;
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+
+    // Stile per messaggi
+    .alert {
+        margin-top: 15px;
+    }
+
+    // Stili per le azioni nella tabella
+    .table-actions {
+        display: flex;
+        gap: 5px;
+        justify-content: flex-end;
+
+        .btn-sm {
+            padding: 6px 8px;
+        }
+    }
+
+    // Migliora la responsive della tabella e dei filtri
+    @media (max-width: 768px) {
+        .search-form {
+            flex-direction: column;
+            gap: 10px;
+
+            .filter-group {
+                max-width: 100%;
+            }
+
+            .btn-giallo,
+            .btn-dark {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+        .table-responsive-custom {
+            overflow-x: scroll;
         }
     }
 }

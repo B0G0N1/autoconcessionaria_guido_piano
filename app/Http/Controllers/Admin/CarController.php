@@ -14,14 +14,63 @@ use Illuminate\Support\Str;
 class CarController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with filtering.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::with('optionals')->get();
-        return view('admin.cars.index', compact('cars'));
+        // Recupera i valori per le select
+        $brands = Brand::all();
+        $years = Car::select('year')->distinct()->orderBy('year', 'desc')->get();
+        $colors = Car::select('color')->distinct()->get();
+        $engines = Car::select('engine')->distinct()->get();
+        $horsepowers = Car::select('horsepower')->distinct()->get();
+
+        // Logica del filtro
+        $query = Car::query();
+
+        if ($request->has('brand') && $request->brand != '') {
+            $query->where('brand_id', $request->brand);
+        }
+
+        if ($request->has('model') && $request->model != '') {
+            $query->where('model', 'like', '%' . $request->model . '%');
+        }
+
+        if ($request->has('year') && $request->year != '') {
+            $query->where('year', $request->year);
+        }
+
+        if ($request->has('used') && $request->used != '') {
+            $query->where('used', $request->used);
+        }
+
+        if ($request->has('color') && $request->color != '') {
+            $query->where('color', $request->color);
+        }
+
+        if ($request->has('engine') && $request->engine != '') {
+            $query->where('engine', $request->engine);
+        }
+
+        if ($request->has('horsepower') && $request->horsepower != '') {
+            $query->where('horsepower', $request->horsepower);
+        }
+
+        if ($request->has('doors') && $request->doors != '') {
+            $query->where('doors', $request->doors);
+        }
+
+        if ($request->has('km') && $request->km != '') {
+            $query->where('km', '<=', $request->km);
+        }
+
+        // Recupera i risultati filtrati
+        $cars = $query->get();
+
+        return view('admin.cars.index', compact('cars', 'brands', 'years', 'colors', 'engines', 'horsepowers'));
     }
 
     /**

@@ -10,7 +10,7 @@ class CarController extends Controller
 {
     public function index() {
 
-        $cars = Car::with('brand', 'optionals')->paginate(6);
+        $cars = Car::with('brand', 'optionals')->paginate(8);
 
         return response()->json([
             'success' => true,

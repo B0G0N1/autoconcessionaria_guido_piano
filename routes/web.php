@@ -21,8 +21,8 @@ use App\Http\Controllers\Guest\GuestController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return redirect()->route('dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -46,13 +46,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/cars', [GuestController::class, 'cars'])->name('guest.cars.index');
-Route::get('/cars/{slug}', [GuestController::class, 'showCar'])->name('guest.cars.show');
+// Route::get('/cars', [GuestController::class, 'cars'])->name('guest.cars.index');
+// Route::get('/cars/{slug}', [GuestController::class, 'showCar'])->name('guest.cars.show');
 
-Route::get('/brands', [GuestController::class, 'brands'])->name('guest.brands.index');
-Route::get('/brands/{slug}', [GuestController::class, 'showBrand'])->name('guest.brands.show');
+// Route::get('/brands', [GuestController::class, 'brands'])->name('guest.brands.index');
+// Route::get('/brands/{slug}', [GuestController::class, 'showBrand'])->name('guest.brands.show');
 
-Route::get('/optionals', [GuestController::class, 'optionals'])->name('guest.optionals.index');
-Route::get('/optionals/{slug}', [GuestController::class, 'showOptional'])->name('guest.optionals.show');
+// Route::get('/optionals', [GuestController::class, 'optionals'])->name('guest.optionals.index');
+// Route::get('/optionals/{slug}', [GuestController::class, 'showOptional'])->name('guest.optionals.show');
 
 require __DIR__.'/auth.php';

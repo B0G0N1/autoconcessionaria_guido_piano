@@ -9,23 +9,27 @@
         </button>
         <div class="collapse navbar-collapse ms-3" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.cars.index') }}">Auto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.brands.index') }}">Concessionarie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.optionals.index') }}">Optional</a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/dashboard') }}">{{ __('Dashboard') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.cars.index') }}">Auto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.brands.index') }}">Concessionarie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.optionals.index') }}">Optional</a>
+                    </li>
+                @endauth
             </ul>
+
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca">
                 <button class="btn btn-outline-light me-3" type="submit">Cerca</button>
             </form>
+
             <div class="d-flex align-items-center ms-2">
                 <ul class="navbar-nav ml-auto">
                     @guest
@@ -45,8 +49,6 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right bg-dark text-light"
                                 aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light"
-                                    href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
                                 <a class="dropdown-item text-light" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                                 <a class="dropdown-item text-light" href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

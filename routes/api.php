@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
+use App\Http\Controllers\Api\OptionalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cars', [CarController::class, 'index'])->name('cars_index');
 Route::get('/cars/{slug}', [CarController::class, 'show'])->name('cars_show');
+
+Route::get('/optionals', [OptionalController::class, 'index'])->name('optionals_index');
